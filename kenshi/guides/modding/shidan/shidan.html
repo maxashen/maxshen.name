@@ -1,0 +1,432 @@
+<html>
+	<head>
+		<title>Save Editing 101</title>
+		<link href="../../../../static\site-styles\valve\steam.css" rel="stylesheet" type="text/css"/>
+		<style>
+			.weapons
+			{
+				padding-left: 1em;
+				display: grid;
+				grid-template-columns: max-content 8em 1fr;
+			}
+			.weapons span
+			{
+				font-weight: bold;
+				text-decoration: underline;
+			}
+			
+			.weapons > dl
+			{
+				grid-column: 1 / 4;
+				
+				padding-left: 0;
+				
+				grid-template-columns: subgrid;
+				grid-row-gap: 0.5em;
+				justify-items: left;
+			}
+			.weapons > dl dt
+			{
+				grid-column: 1 / 3;
+				
+				padding-left: 0;
+			}
+			.weapons > dl dd
+			{
+				grid-column: 3;
+			}
+			
+			.weapons > dl > dl
+			{
+				grid-column: 1 / 4;
+				grid-template-columns: subgrid;
+				grid-row-gap: 0;
+			}
+			.weapons > dl > dl > dt
+			{
+				padding-left: 2em;
+			}
+		</style>
+	</head>
+	<body>
+		<nav id="breadcrumb">
+			<a href="../../../../index.html">Home</a> >
+			<a href="../../../index.html">Kenshi</a> >
+			<a href="../../index.html">Guides</a> >
+			<a href="../index.html">Modding</a>
+		</nav>
+		<main>
+			<header id="overview">
+				<img src="shidanthumb.jpg" alt="The FCS Icon"/>
+				<h1>Save Editing 101</h1>
+				<address>By <a rel="author">Shidan</a></address>
+				<div class="dotted-line"></div>
+				<section>
+					<p>A guide to editing your save game using the FCS. For changing stats, names, relations, and more! If there is something not covered by the guide that you want know, simply ask and if it's possible to do I'll add it to the guide. :)</p>
+				</section>
+			</header>
+			<div id="sidebar">
+				<aside id="infobar" class="sidebar">
+					<section>
+						<div class="sidebar-title">Created by</div>
+						<div id="author">
+							<img src="shidan.jpg" alt="Shidan's Avatar"/>
+							<address><a rel="author">Shidan</a></address>
+						</div>
+					</section>
+					<hr/>
+					<section>
+						<p><span class="tags-title">Category:</span> <a>Modding or Configuration</a></p>
+						<p><span class="tags-title">Languages:</span> <a>English</a></p>
+					</section>
+					<hr/>
+					<section id="timestamp">
+						<span>Posted</span>
+						<time datetime=2018-05-16T15:41>May 16, 2018 @ 3:41pm</time>
+						<span>Updated</span>
+						<time datetime=2022-04-22T12:19>Apr 22, 2022 @ 12:19pm</time>
+					</section>
+				</aside>
+				<aside id="toc" class="sidebar">
+					<section>
+						<div class="sidebar-title">Guide Index</div>
+					</section>
+					<hr/>
+					<section>
+						<nav>
+							<ul>
+								<li><a href="#overview">Overview</a></li>
+								<hr/>
+								<li><a href="#introduction">Introduction</a></li>
+								<li><a href="#gettingstarted">Getting Started</a></li>
+								<li><a href="#money">Player Money</a></li>
+								<li><a href="#values">Basic Character Values</a></li>
+								<li><a href="#relations">Faction Relations</a></li>
+								<li><a href="#renaming">Renaming Characters</a></li>
+								<li><a href="#race">Character Race</a></li>
+								<li><a href="#teleporting">Character Coordinates (Teleporting)</a></li>
+								<li><a href="#color">Armour Colour</a></li>
+								<li><a href="#quality">Weapon and Armour Quality</a></li>
+								<li><a href="#equipping">Equipping items in locked slots</a></li>
+								<li><a href="#transferring">Transferring characters between factions</a></li>
+								<li><a href="#advanced">Advanced Settings</a></li>
+								<li><a href="#extratags">Armour Uniform and Stolen tags</a></li>
+								<hr/>
+								<li><a><s>Comments</s></a></li>
+							</ul>
+						</nav>
+					</section>
+				</aside>
+			</div>
+			<article id="content">
+				<section id="introduction">
+					<h2>Introduction</h2>
+					<p>This guide should help you through any save editing for Kenshi you may need. If you don't understand part of it, I'm happy to answer any questions. Want to do something not covered by this guide? Feel free to ask as well, if it's somehting that can be done I'll add it to the guide.</p>
+				</section>
+				<section id="gettingstarted">
+					<h2>Getting Started</h2>
+					<p>This section will cover the basic things you need to do know for any save editing.</p>
+					<h3>Backup</h3>
+					<p>Always backup your save before editing it, in case you do something wrong you want to be able to revert to before you made the edit(s).</p>
+					<p>The easiest method to do this is to just create a new save game while in game, instead of overwriting your normal one. My personal preference is to create a new save, and then also quicksave. Then when you go in to edit the game, edit the quicksave. By only ever editing the quicksave, this prevents you from ever accidentally editing the wrong save.</p>
+					<h3>Opening save files using the FCS</h3>
+					<p>First launch the FCS, easiest method is to select the "Launch Game Editor" option on the initial popup when running Kenshi through Steam.</p>
+					<img src="SEG2.png" alt="Screenshot of the Steam Popup when Launching Kenshi"/>
+					<p>Once you're in, you'll be met with a list of mods to edit or turn off. Just close this with the x in top right of the window, you don't need it for save editing. Then click "open any" from the buttons along the top.</p>
+					<img src="SEG1.png" alt="Screenshot of the Open Any Button in FCS"/>
+					<p>After that you'll be met with the installation folder of the game. (Note: as of 1.0.50 the default save location has been moved to C:\Users\<YourUsername>\AppData\Local\kenshi\save. If you cannot see the appdata folder, make sure to enable viewing of hidden files on windows.) Navigate to the "save" folder, then locate the folder of the save you are trying to edit (quicksave if you use my method). With the save folder open you'll be looking at the folders and files that make up the save game.</p>
+					<img src="SEG3.png" alt="Screenshot of the Kenshi Save Folder in Windows Explorer"/>
+					<p>Generally speaking, you'll almost always be opening either the quick.save file or your squad's .platoon file found in the platoon folder. The platoon file will be named after your faction in-game. If you've never renamed it, it will be something like Nameless_0.platoon.</p>
+					<h3>Navigating a File</h3>
+					<p>When you open a file you will be met with this window of entries, of which almost all are named 0.</p>
+					<img src="SEG4.png" alt="Unhelpful Screenshot of a File in FCS"/>
+					<p>This is very unhelpful with regards to knowing what each entry is. There is however a way to assist you in deciphering it. By clicking the "Changes" button up at the top, it will show you another window with all the entries listed, but this time it will show a type next to the entry. In this guide I will often refer to entries by their type, so you'll be using this regularly.</p>
+					<img src="SEG5.png" alt="Helpful Screenshot of a File in FCS"/>
+					<p>Another thing you'll need to know is how to differentiate between multiple entries of the same type, especially with regards to editing character data, as you'll have medical state, gamedata state, inventory state, etc. entries for each character in the squad, all with essentiallly the same name and type.</p>
+					<p>In this case you'll want to open the "INSTANCE_COLLECTION" type entry. At which point you'll want to open an instance shown on the right by double clicking on it. All the entries shown in this instance pertain to the same character, and can be opened by simply double clicking it them here, so can use this method to find the corresponding entries you want to edit when trying to edit a specific character. As you can see in the screenshot below, the stats entry is named after the character, this allows you to tell which instance goes to which character.</p>
+					<img src="SEG7.png" alt="Screenshot of an INSTANCE_COLLECTION Entry in FCS"/>
+				</section>
+				<section id="money">
+					<h2>Player Money</h2>
+					<p>This is a rather simple change, though located in an unusual location. Open the quick.save file and search the changes list until you find the entry named "0" that has the type "camera" on the list. Alternatively, if you're having trouble with that, go down to the search bar in the main window, and type this exactly "Type = camera" like shown below.</p>
+					<img src="SaveEditGuide.png" alt="Screenshot of the Main Window in FCS"/>
+					<p>After you locate the entry, simply edit the "player money" value located on the left side of it. Unsure what the upper limit on the value is, so be wary when increasing it. Probably don't go higher than 2 billion or so to avoid issues.</p>
+					<p>Thanks to Neorro for pointing out where the value could be found. :)</p>
+				</section>
+				<section id="values">
+					<h2>Basic Character Values (Bounty, Stats, Health, Hunger, Death, Limbs, etc.)</h2>
+					<h3>Introduction</h3>
+					<p>This chapter will take you through the process of modifying your character's Attributes, Skills, Health, Hunger, and similarly related character data.</p>
+					<p>Regardless of what you'r editing here, you'll want to open the platoon file that contains the character you want to edit. It's generally recommended that you move the character you want to edit to his own squad prior to editing, as it simply makes it easier to find the correct entries to edit.</p>
+					<h3>Bounties</h3>
+					<p>For this one you'll need to open the GAMESTATE_CHARACTER entry, inside you'll find a number of values related to bounties. "amount#, bountyexp#, bountyfac#, claim#, and crimes#.</p>
+					<p>First you need to identify which number corresponds to which number. For this you need to check the bountyfac value, this will show the faction's unique SID. I will list the most common bounty factions below, otherwise you'll need to open up a mod in the FCS, then go to the faction list and search the SID using the search bar.</p>
+					<dl>
+						<dt>United Cities</dt><dd><code>defaultEmpireFactionSID</code><dd>
+						<dt>Holy Nation</dt><dd><code>1083-gamedata.base</code></dd>
+						<dt>Shek Kingdom</dt><dd><code>11624-Dialogue (10).mod</code></dd>
+					</dl>
+					<p>To remove a specific bounty, the safest method is to change the size of the bounty using the amount# value. Setting it to a low number (but higher than 0), will allow the bounty to expire naturally and quickly. Or you could set it to whatever else you want if you're not after removal.</p>
+					<h3>Personality</h3>
+					<p>All characters in Kenshi have a personality, sometimes preset, sometimes random, but all have one. They govern how a character responds to dialog, and the lines they say. While this is mostly a factor for NPCs, since their dialog tends to be the ones with real effects in the world, some players may be interested in identifying or changing their own character's dialog.</p>
+					<p>It's a rather simple change. First, open the platoon file for the character, and locate the "GAMESTATE_CHARACTER" type entry. Towards the bottom half of the lis tof values, there will be one named "personality" with a number listed beside it. The number is which personality the character has, and it corresponds to the numbers shown below.</p>
+					<dl class="numberdl">
+						<dt>1</dt><dd>Honorable</dd>
+						<dt>2</dt><dd>Traitorous</dd>
+						<dt>5</dt><dd>Smart</dd>
+						<dt>6</dt><dd>Dumb</dd>
+						<dt>9</dt><dd>Brave</dd>
+						<dt>10</dt><dd>Fearful</dd>
+						<dt>14</dt><dd>Maniacal</dd>
+					</dl>
+					<p>There are also a few more, though I advise against using them, and they will never spawn naturally in vanilla. They were never fully implemented, though they do function. There are just almost no lines for them.</p>
+					<dl class="numberdl">
+						<dt>11</dt><dd>Warm/Kind</dd>
+						<dt>12</dt><dd>Cold/Cruel</dd>
+						<dt>13</dt><dd>Normal</dd>
+					</dl>
+					<p>If you wish to change the personality, simply change the number to the one that corresponds to the personality you'd like.</p>
+					<h3>Attributes and Skills</h3>
+					<p>This is one of the simpler changes, as the entry you need to edit is simply named after the character. Don't even need to use the changes screen to assist you, just scroll through the list until you find the character's name, and then open it by double clicking.</p>
+					<p>You'll be met with the window below, showing each of the character's stats. Simply change the numbers next to each stat to change what level it is. It is however HIGHLY recommended you never set them above 100, as sometimes they bug out when higher than that, often having negative effects on your character.</p>
+					<img src="SEG8.png" alt="Screenshot of Shodan's Player Character STATS in FCS"/>
+					<h3>Health</h3>
+					<p>For this you'll want to open the MEDICAL_STATE entry for your character, either through the changes screeen, or the INSTANCE_COLLECTION if you have multiple characters in the squad.</p>
+					<p>Inside you'll see multiple values corrsponding to each body part, sorted in order of the parts in-game.</p>
+					<dl>
+						<dt>bandage</dt><dd>the amount of cut damage bandaged on the part</dd>
+						<dt>flesh</dt><dd>your "real" health on the part</dd>
+						<dt>rig</dt><dd>how much of the HP has been splinted</dd>
+						<dt>stun</dt><dd>the amount of blunt damage on the part</dd>
+						<dt>wear</dt><dd>the wear and tear damage on a robotic part</dd>
+					</dl>
+					<p>Any discrepancy between the values will be treated as unbandaged cut damage. (e.g. Setting a human's fesh value to 50 and the bandage to 20 will leave 30 unbandaged cut damage on the part.)</p>
+					<p>The simplest thing to do is heal a character. By simply setting all the values but flesh to 0 and then changing your flesh values to the character's maximum will put your character back to full health.</p>
+					<p>Alternatively you could damage a character by changing their flesh value to a lower value than their maximum. Handy for losing specific limbs easily, as you can just set the limb's health to -100% of their maximum health, and it will pop off the next time you load up the game if your limb loss setting is set to frequent in-game.</p>
+					<p>You'll also see the blood level in here, which as you might expect, is the character's blood level. It's 1 to 1, so this is your exact blood level shown in-game.</p>
+					<h3>Hunger</h3>
+					<p>Inside the MEDICAL_STATE entry for the character this is shown on the "hung" value, as a number from 0-3 using decimals for the full values (e.g. 2.5 would be 250 hunger vlaue in-game.)</p>
+					<p>There is also the "fed" value, which is how many NU the character has currently consumed and is causing hunger regen. It uses the same decimal system, so 0.5 = 50 NU points in-game.</p>
+					<h3>Death and KO Status</h3>
+					<p>Another MEDICAL_STATE edit. There are a few different values related to this.</p>
+					<dl>
+						<dt>coma</dt><dd>whether the character is in a recovery coma, and needs to get above 0 HP to wake up</dd>
+						<dt>dead</dt><dd>whether the character is dead or not</dd>
+						<dt>KO</dt><dd>the KO timer on the character in seconds, assuming they're not dead or in a coma</dd>
+						<dt>unconcious</dt><dd>if the character is awake or not</dd>
+					</dl>
+					<p>Most edits to this are fairly simply. If you've got a KO'd character, you can simply set the KO timer to 0 you'll wake up as soon as you load up the save. Set dead to false if you want to revive a killed character, coma to false if you want to get them out of a coma early.</p>
+					<p>Keep in mind HP data WILL override these flags though. If you don't fix the HP of your killed character for instance, they'll just die again once you reload.</p>
+					<h3>Limb Status</h3>
+					<p>This is more about how to regain limbs lost, as it is far simpler to lose limbs via HP editing as mentioned above.</p>
+					<p>In the MEDICAL_STATE entry, you'll see a "limbs" value on the left side if they are a character who has lost and limbs (if they haven't, then the value won't even be there), with a number next to it. The number determines which limbs are lost and such, however it can be confusing to understand what number to use.</p>
+					<p>Regaining all limbs is very simple though, as you can simply right click on the limbs value and then click delete value. Next time you load up the game your limbs will be back to normal.</p>
+					<p><strong>Warning</strong>: I'm unsure what will happen to prosthetics worn at this time, so I suggest only doing this with none equipped.</p>
+					<p>Note: Let me clarify, it's the limbs value on the left side with all the other values that you need to delete. I've seen many people try to delete the ones on the right side, and then get confused why it doesn't work.</p>
+					<h3>Limbs details</h3>
+					<p>The numbers are handled in an 8-bit binary format, separated into four sections (one for each limb).
+					(e.g. 00 00 00 00) The pairs represent the right leg, left leg, right arm, and left arm respectively. Each pair has 3 possible states that it can recognize, 00 means that the limb is still attached, 01 means the limb has been severed, while 10 means there is a prosthetic attached. You then use the resulting binary number and convert it to decimal (there are converters online if you don't know how).</p>
+					<p>For example, 01010101 is all limbs are lost, and converts to 85. So 85 is the number you'd put in the limbs value if you wanted to remove all limbs. 00000101 would be both arms are missing, and converts to 5. 01010000 would be both legs are missing, and converts to 80.</p>
+					<p>Note: You cannot add a prosthetic this way, as the item data doesn't exist. 10101010 (170) would not give you prosthetics on all limbs, even though that's what it means. It will simply remove the limbs, and change the data to 01010101 (85) automatically.</p>
+				</section>
+				<section id="relations">
+					<h2>Faction Relations </h2>
+					<p>For this one you'll be editing the "quick.save" file instead. And won't need to mess with all that changes screen or instance collection stuff, everything is pretty straighforward.</p>
+					<ol>
+						<li>Locate the faction in the list you want to change your relation with. This will just have the faction name as its name, with no numbers. And the only one that is a "GAMESTATE_FACTION" type entry. Open it by double clicking.</li>
+						<li>Scroll down until you get to the "relationSID" numbers, look through them until you find one that says "204-gamedata.base" next to it. Make a note of the number associated with this entry. (E.G. If it's "relationSID26" then make note of the 26. That's you, for this faction.)</li>
+						<li>Now scroll back up to the "relation" numbers, look through them until you find the one with the same number as the "relationSID" entry from before. (E.G. relation26)</li>
+						<li>Change the value to the right to whatever you want your new relation level to be with this faction. Try to stick to -100 to 100, going any further can result in bugs under certain circumstances. Close the faction's window when you're done.</li>
+						<li>Repeat for any other factions you want to edit.</li>
+						<li>Now Save using the button in the top left. You're done! Load your save and enjoy. :)</li>
+					</ol>
+				</section>
+				<section id="renaming">
+					<h2>Renaming Characters</h2>
+					<p>First off, open the platoon file. Then locate the "GAMESTATE_CHARACTER" entry, which will have the "name" value about half way down the list. Replace the name shown to change the name your character is displayed as in-game.</p>
+					<p>Personally, I also would advise changing the name on the "STATS" entry for that character. It is not required, but if you plan on editing more in the future it would be simpler for it to be named the same.</p>
+				</section>
+				<section id="race">
+					<h2>Character Race</h2>
+					<p>For this one you'll need a bit of in-game preparation. The first thing you'll need to do is get another character, one of the race you want to switch your character to. Feel free to customize them before hand, or you can do it later.</p>
+					<p>Make sure both the character you want to change, as well as the character of the race you want to switch to are in the same squad. And preferably nobody else in the squad. Then go open their platoon file.</p>
+					<p>Find and open the INSTANCE_COLLECTION and open each character's CHARACTER_APPEARANCE entry and temporarily rename it something you can remember, I personally prefer to use the character's name.</p>
+					<p>In the CHARACTER_APPEARANCE entry for the character whose race you want to swap, delete the reference in the race section on the right. Then once that is done, click the little box in the top right of the entry and select "Copy data form Item" from the list of options, then select the other CHARACTER_APPEARANCE you renamed. This will overrite the appearance of your character with the other character's, including their race.</p>
+					<p>Now, you're not quite done yet. You'll need to copy over the character's part hit chances, or you may run into some unusual bugs with them not matching correctly. Open both character's MEDICAL_STATE entries, and perhaps rename them to be sure and remember which is which.</p>
+					<p>Once inside look for the hit0, hit1, hit2, etc. values on both entries. On your main character, you'll want to change any numbers on these values that do not match to the same ones from your stand in. (e.g. If your main has an 80 on hit4, but the stand in has a 40 on it, you'll manually change the 80 to a 40.)</p>
+					<p>Once the hit values match, you're done now. Rename any entries you renamed back to 0, then save the changes. Once back in-game you can simply dismiss the stand in, or keep them, whatever you wish. Hope you enjoy your new race. :)</p>
+				</section>
+				<section id="teleporting">
+					<h2>Character Coordinates (Teleporting)</h2>
+					<p>First thing you want to do is locate the coordinates you want to teleport to. There are two main methods I use for this.</p>
+					<ol>
+						<li>Teleport to another character's location. If you have another character, it's rather easy to simply copy their location in the save data. Make sure they're in the same squad to make it easier to access.</li>
+						<li>Place a campfire at the location you want to teleport to, select the campfire, then open the in-game editor with Shift+F12. It should show you the coordinates of the campfire.</li>
+					</ol>
+					<p>Once you have either your character positioned, or the coordinates, open the platoon file for the squad, and open the instance collection. Each instance inside corresponds to a character, open them up to identify which, their name will appear towards the bottom of the instance.</p>
+					<p>At the top of the instance, there will be some x y z coordinates, these are what you need to edit to teleport a character. If you used the campfire method, simply put in the coordinates of the campfire here. If you were using the squad mate method, locate their instance and copy their coordinates over.</p>
+					<p>Once you're done, simply save the file and load the save. </p>
+				</section>
+				<section id="color">
+					<h2>Armour Colour </h2>
+					<p>So for starters, like many things this is simplest if you remove anything you don't want coloured the same colour. Remove weapons, backpacks, armour, and other items. Anything you don't want a colour scheme applied to (yes all items can have it applied, though 99% of the time the won't render the colours unless they're an armour that is set up for it). Multiple characters can be used, though you can't super easily identify which characters are holding which items (though you can track it with IDs if you want, it's an unnecessary pain when you could just do one colour at a time and apply it to all of them).</p>
+					<p>So the first step is to open the platoon file, and locate the "INVENTORY_ITEM_STATE" type entry (or entries if you're editing multiple items), open it and near the top on the left you should see a "color sid" value. By default it will be blank in most cases, though you will sometimes find items with a colour applied, and its ID will be shown here (erasing the ID and leaving the field blank also functions as a way to clear colours).</p>
+					<p>You'll likely need another instance of the FCS open (you can launch multiple directly through the exe file found in your kenshi folder), as you will need to acquire the SID of the colour scheme you want to apply. For this one, make sure to load gamedata.base, Newwworld.mod, Dialogue.mod, and rebirth.mod when booting up the FCS. You can load any custom mods you have as well too, but those ones are essential. If you only load the base game files, make sure NOT to save any changes you make while in here.</p>
+					<p>Along the left side of the main window in the FCS you'll see various sections, select the Colour Scheme section to view all the colour shemes currently available. You can open each of these up and see exactly which primary and secondary colours are inside. Alternatively, if you're making your own mod, you can create a new entry and select the colours yourself.</p>
+					<p>Once you've decided on a colour, go up to the top of the entry for that colour scheme, right click where it says "String ID", and select "Copy Value" from the list. Now go over to the platoon file again, and paste that value into the "color sid" field. Repeat for all your items you wish to colour, and then save the platoon file. </p>
+				</section>
+				<section id="quality">
+					<h2>Weapon and Armour Quality </h2>
+					<p>As with many edits, this is simplest with only one character in the squad. And ideally only one item in their inventory.</p>
+					<h3>Armour</h3>
+					<p>You'll start by opening the platoon file for the characters, and then navigate to the "INVENTORY_ITEM_STATE" entry. (There will be one of these for every item on any character in the squad, which is why you want only one item and one character ideally. More items can be done fairly easily, if you're performing the same edit on all of them.)</p>
+					<p>Inside you'll find a "Level" value on the left side. This determines the armour's quality. I'll list the vanilla quality levels below, though you are not required to stay within their ranges. Stats will continue to improve, though they will eventually hit a cap regardless of level.</p>
+					<dl class="numberdl">
+						<dt>5</dt><dd>Prototype</dd>
+						<dt>20</dt><dd>Shoddy</dd>
+						<dt>40</dt><dd>Standard</dd>
+						<dt>60</dt><dd>High</dd>
+						<dt>80</dt><dd>Specialist</dd>
+						<dt>95</dt><dd>Masterwork</dd>
+					</dl>
+					<h3>Weapons</h3>
+					<p>Weapons are a little more complicated, but not by much. You'll start the same as armour, by opening the platoon for the character in question, and navigating to the "INVENTORY_ITEM_STATE" entry.</p>
+					<p>Here you want to look for two values. "company sid" and "material sid"</p>
+					<p>These govern the manufacturer and model of the weapon respectively. If you mismatch these for an incompatible setup (e.g. an Ancient Meitou for instance), the weapon will be reset to Catun Scrapmasters Catun No.1 automatically when you load the save.</p>
+					<p>Below is a list of all the manufacturers and their models. You must fill in the SID shown to the right. "company sid" is the one next to the manufacturer name, "material sid" is the one next to model name.</p>
+					<div class="weapons">
+					<span>Manufacturer</span><span style="grid-column: 1 / 3; padding-left: 2em;">&#x21b3; Model</span><span>Material SID</span>
+					
+					<dl class="bolddtdl weapons">
+						<dt>Unknown</dt><dd><code>912-gamedata.base</code></dd>
+						<dl>
+							<dt>Rusted Junk</dt><dd><code>913-gamedata.base</code></dd>
+							<dt>Rusting Blade</dt><dd><code>914-gamedata.base</code></dd>
+						</dl>
+						<dt>Ancient</dt><dd><code>917-gamedata.base</code></dd>
+						<dl>
+							<dt>Mid-Grade Salvage</dt><dd><code>918-gamedata.base</code></dd>
+							<dt>Old Refitted Blade</dt><dd><code>925-gamedata.base</code></dd>
+							<dt>Refitted Blade</dt><dd><code>926-gamedata.base</code></dd>
+						</dl>
+						<dt>Catun Scrapmaster</dt><dd><code>1057-gamedata.base</code></dd>
+						<dl>
+							<dt>Catun No.1</dt><dd><code>1058-gamedata.base</code></dd>
+							<dt>Catun No.2</dt><dd><code>1061-gamedata.base</code></dd>
+							<dt>Catun No.3</dt><dd><code>1060-gamedata.base</code></dd>
+						</dl>
+						<dt>Skeleton Smiths</dt><dd><code>927-gamedata.base</code></dd>
+						<dl>
+							<dt>Mk I</dt><dd><code>1059-gamedata.base</code></dd>
+							<dt>Mk II</dt><dd><code>1067-gamedata.base</code></dd>
+							<dt>Mk III</dt><dd><code>930-gamedata.base</code></dd>
+						</dl>
+						<dt>Edgewalkers</dt><dd><code>1070-gamedata.base</code></dd>
+						<dl>
+							<dt>Edge Type 1</dt><dd><code>1068-gamedata.base</code></dd>
+							<dt>Edge Type 2</dt><dd><code>1071-gamedata.base</code></dd>
+							<dt>Edge Type 3</dt><dd><code>1069-gamedata.base</code></dd>
+						</dl>
+						<dt>Cross</dt><dd><code>52288-rebirth.mod</code></dd>
+						<dl>
+							<dt>Meitou</dt><dd><code>52293-rebirth.mod</code></dd>
+						</dl>
+						<dt>Homemade</dt>
+						<dd><code>PLAYER_WEAPONS</code></dd>
+					</dl>
+					</div>
+					<p>Homemade can use any model from any vanilla manufacturer, with the exception of Meitou.</p>
+				</section>
+				<section id="equipping">
+					<h2>Equipping items in locked slots</h2>
+					<p>This section will give a rundown of how to manipulate inventory items. Most of the time this is fairly pointless, as you can just do it in-game, but in some cases inventory slots can be locked due to race/prosthetics, and this method can be used to equip items to those slots.</p>
+					<p>First off, open the platoon file of the squad. It is advised to empty your character's inventory of everything prior to this edit, except the item you wish to equip. That means no clothes, backpack, weapons, or equipped limbs even. And put them in their own squad if possible.</p>
+					<p>Once you have the file opened, look for an "INVENTORY_ITEM_STATE" type entry, if you emptied your inventory and separated to a different squad there should only be one. If there is more than one, you may need to do a bit of detective work to identify the item.</p>
+					<p>(If you've only got one item you can skip this)</p>
+					<p>Namely its "inventory x" and "inventory y" values will be useful, as that will tell you the position of the item (X starts at 0 in the far left of the section, and counts up as it goes to the right. Y starts at 0 at the top and counts up as goes down.). Also note the "section" value, as that will tell you what area of the inventory it is in. Another method to identify it would be to check its "base data sid" value, and compare it to the value shown at the top when viewing items while modding.</p>
+					<p>Now that you have opened the item, take note of the value named "section" on the left. This will tell you what part of the inventory the item is in. The possible positions are:</p>
+					<dl>
+						<dt>main</dt><dd>This is the main inventory window</dd>
+						<dt>head</dt><dd>Helmet slot</dd>
+						<dt>shirt</dt><dd>Shirt slot</dd>
+						<dt>armour</dt><dd>Body armour slot</dd>
+						<dt>legs</dt><dd>Pants slot</dd>
+						<dt>boots</dt><dd>Boots slot</dd>
+						<dt>back</dt><dd>Primary weapon slot</dd>
+						<dt>hip</dt><dd>Secondary weapon slot</dd>
+						<dt>belt</dt><dd>Belt slot</dd>
+						<dt>backpack_attach</dt><dd>Backpack slot</dd>
+						<dt>backpack_content</dt><dd>Backpack inventory window</dd>
+					</dl>
+					<p>The vast majority of the time you will just be moving between these 4: main, head, shirt, boots.</p>
+					<p>Assuming your item you wish to equip is in your main inventory, and the slot you wish to equip it is empty, all you need to do is change the value that says "main" to say the name of the slot you wish to equip the item to. For example, to equip boots on someone who has lost their legs, you would change the "main" value to "boots".</p>
+					<p>If the slot already has something equipped (such as you wanting to swap the gear equipped), then all you have to do is replace the section value for the equipped item as well, changing it back to "main".</p>
+					<p>Save the file when you're done, and you should be good to go.</p>
+					<p>Do note that with the exception of on prosthetics, items equipped in this method will not show up on the character. Equipping a shirt or a helmet on a skeleton will not be visible, though it will function statistically. Prosthetics and boots seem to be the exception to this, as they will render on the prosthetics.</p>
+					<p>Also, while this method will allow you to equip items into locked slots, it does not allow you to equip items not allowed by a certain race. For example, you could equip a shirt to a skeleton, but not to a hiver. Because hivers have a shirt slot, and just cannot equip normal shirts.</p>
+					<p>Similarly, you cannot equip items into slots they cannot normally go in (i.e. a shirt in the armour slot), nor can you equip multiple items in the same slot using it. </p>
+				</section>
+				<section id="transferring">
+					<h2>Transferring characters between factions </h2>
+					<p>This section is all about moving characters to and from your squad. This allows you to recruit otherwise non-recruitable characters, switch the faction of NPCs, or even add your characters to other factions for whatever purposes you wish (for example, training dummies).</p>
+					<p>As this was not discovered by myself, I'll just be posting a link Biglulu's original guide on reddit. They did an excellent job figuring out a way to do this, so make sure to give them some love. :)</p>
+					<p><a href="https://www.reddit.com/r/Kenshi/comments/lztg6d/how_to_edit_a_character_into_your_squad/?utm_source=share&utm_medium=web2x&context=3">https://www.reddit.com/r/Kenshi/comments/lztg6d/how_to_edit_a_character_into_your_squad/?utm_source=share&utm_medium=web2x&context=3</a></p>
+				</section>
+				<section id="advanced">
+					<h2>Advanced Settings (Hunger Rate, Research Speed, etc.) </h2>
+					<p>This section is for editing the advanced option you are given when starting a new game or import. It can be useful for if you want to change one, but do not want to import your save for some reason. Or if you want to set one to a value outside the normal limits.</p>
+					<p>For starters, you'll want to open the quick.save file, and find the camera type entry. All of the settings are in there, so we'll go by each one in order.</p>
+					<h3>Hunger Time</h3>
+					<p>This one will be the value named "ht", along the left side. Remember, lower number means a faster hunger rate, and a higher number means a slower one. Don't accidentally kill yourself when trying to make it easier. ;)</p>
+					<h3>Chance of Death</h3>
+					<p>This one is named "cod", over on the left side. Lower numbers mean a slower wound deterioration rate, higher numbers mean a faster one.</p>
+					<h3>Global Damage Multiplier</h3>
+					<p>This one is named "gdm", over on the left. Lower numbers mean less damage and exp per hit, higher numbers mean more damage and exp per hit.</p>
+					<h3>Production Speed</h3>
+					<p>This one is named "ps", over on the left. Lower number means slower crafting and item production, higher numbers mean faster crafting and item production.</p>
+					<h3>Research Speed</h3>
+					<p>This one is named "rs", over on the left. Lower numbers mean slower research, higher numbers mean faster research.</p>
+					<h3>Building Speed</h3>
+					<p>This one is named "bs", over on the left. Lower numbers mean slower construction, higher numbers faster construction.</p>
+					<h3>Number of Nests Multiplier</h3>
+					<p>This one is named "nnm", over on the left. Lower numbers mean fewer nests, higher numbers mean more nests.</p>
+					<h3>Bandits Loot the Player</h3>
+					<p>This one is named "bl", over on the left. If true, bandits can steal items from you when you're down. If false, they cannot. (Note: Honestly not sure if this does anything anymore)</p>
+					<h3>Easy Prospecting</h3>
+					<p>This one is named "ep", over on the left. <del>If true, the map has good resources all over. If false, it has normal resources.</del> Though this doesn't work anymore, and the setting does nothing.</p>
+				</section>
+				<section id="extratags">
+					<h2>Armour Uniform and Stolen tags</h2>
+					<h3>Uniform</h3>
+					<p>- Courtesy of Cent0rea88</p>
+					<p>First, you should clear your inventory of any items you are not trying to edit, and move the character to their own squad. This is not strictly required, but it makes it much easier to locate the items you are editing.</p>
+					<p>Open the platoon file for the squad your character is in, then using the changes screen or adding the type column, locate the entry with the type "INVENTORY_ITEM_STATE". If you emptied your inventory except for the one item, there should be only the one.</p>
+					<p>You'll find the uniform value along the left side, near the bottom. Erase anything in this value to remove the uniform tag.</p>
+					<p>Alternatively, you can also add or change which faction the item is a uniform for, by adding the StringID for the faction. I'll list some major faction's IDs here, but you can find the ID yourself by opening the faction when editing a mod using the FCS, it will be at the top of the faction's entry.</p>
+					<dl>
+						<dt>Anti-Slavers</dt><dd><code>58229-Dialogue.mod</code></dd>
+						<dt>Flotsam Ninjas</dt><dd><code>49377-rebirth.mod</code></dd>
+						<dt>Holy Nation</dt><dd><code>1083-gamedata.base</code></dd>
+						<dt>Shek Kingdom</dt><dd><code>11624-Dialogue (10).mod</code></dd>
+						<dt>Slave Traders</dt><dd><code>1084-gamedata.base</code></dd>
+						<dt>Traders Guild</dt><dd><code>1088-gamedata.base</code></dd>
+						<dt>United Cities</dt><dd><code>defaultEmpireFactionSID</code></dd>
+					</dl>
+					<h3>Stolen</h3>
+					<p>First, you should clear your inventory of any items you are not trying to edit, and move the character to their own squad. This is not strictly required, but it makes it much easier to locate the items you are editing.</p>
+					<p>Open the platoon file for the squad your character is in, then using the changes screen or adding the type column, locate the entry with the type "INVENTORY_ITEM_STATE". If you emptied your inventory except for the one item, there should be only the one.</p>
+					<p>You'll find the stolen tags on the left side, near the bottom. All named something about "ownedby..."</p>
+					<p>Set the following values to 0, ownedbyC, ownedbyCS, ownedbyI, and ownedbyS. Then set the ownedbyTYPE value to 11.</p>
+					<p>This will clear the stolen flags from the item. </p>
+				</section>
+			</article>
+		</main>
+		<footer>
+			<img  id="footerLogo" src="../../../../static\site-styles\valve\valve.png" alt="Valve Logo"/>
+			<small id="footerText">
+				© Valve Corporation. All rights reserved.<br/>
+				All trademarks are property of their respective owners in the US and other countries.
+			</small>
+		</footer>
+	</body>
+</html>
