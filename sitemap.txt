@@ -1,4 +1,6 @@
 @maxshen.name\
+╟404.html
+╟CNAME
 ╠═╦═kenshi\
 ║ ╠═╦═guides\
 ║ │ ╠═╦═modding\
@@ -207,6 +209,7 @@
 ║ │ └index.html
 ║ └index.html
 ╠═╦═static\
+║ ╟globe.ico
 ║ ╚═╦═site-styles\
 ║   ╚═╤═valve\
 ║     ├content_background.png
