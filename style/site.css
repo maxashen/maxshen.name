@@ -1,0 +1,99 @@
+html
+{
+	
+}
+
+body
+{
+	display: grid;
+	font-family: serif;
+	grid-template-columns: 1fr minmax(80ch, min(80%, 120ch)) 1fr;
+	gap: 2ch;
+	font-size: 18px;
+	scrollbar-gutter: stable;
+}
+
+	footer
+	{
+		grid-column: 2;
+		
+		color: gray;
+		text-align: right;
+		font-size: 10px;
+		margin-top: 20%;
+	}
+	
+	main
+	{
+		grid-column: 2;
+		
+		margin-top: 10ch;
+	}
+	
+		main video
+		{
+			width: 100%;
+		}
+	
+	nav
+	{
+		grid-column: 1 / 4;
+		
+		background: linear-gradient(black 90%, gold, black);
+		color: gold;
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		width: 100vw;
+		
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+	}
+	
+		nav > h1
+		{
+			margin-left: 4ch;
+		}
+		
+		nav > ul
+		{
+			grid-column: 3;
+			
+			margin: 0;
+			padding: 0 4ch 0 0;
+			
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr;
+		}
+		
+			nav li
+			{
+				list-style-type: none;
+				display: table;
+				text-align: center;
+			}
+			
+			nav a
+			{
+				text-decoration: none;
+				color: inherit;
+			}
+			
+			nav li a
+			{
+				display: table-cell;
+				padding: 0 1ch;
+				vertical-align: middle;
+			}
+			
+			nav li a.current-nav, nav a.current-nav:hover
+			{
+				background: linear-gradient(darkgoldenrod 90%, gold, black);
+				color: black;
+			}
+			
+			nav li a:hover
+			{
+				background: linear-gradient(#222222 90%, gold, black);
+				color: white;
+			}
